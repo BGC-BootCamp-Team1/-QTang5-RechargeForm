@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { PhoneNumberModule } from './phone-number/phone-number.module';
 import { RechargeFormComponent } from './recharge-form/recharge-form.component';
 import { MenuComponent } from './menu/menu.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { MenuComponent } from './menu/menu.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    PhoneNumberModule
+    PhoneNumberModule,
+    FormsModule 
   ],
   providers: [],
   bootstrap: [AppComponent]

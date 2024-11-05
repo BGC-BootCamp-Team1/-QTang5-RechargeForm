@@ -2,10 +2,11 @@
     <app-phone-number></app-phone-number>
 
     <label for="discount">Promotion:</label>
-    <select id="discount">
-        <option>Mobile Store Recharge 9.95% Discount</option>
+    <select id="discount" [(ngModel)]="selectedDiscount" name="selectedDiscount" (change)="updateDiscount() ">
+        <option value="Mobile Store Recharge 5% Discount">Mobile Store Recharge 5% Discount</option>
+        <option value="VIP Recharge 20% Discount">VIP Recharge 20% Discount</option>
     </select>
-    <span class="discount-tag">Discount - Mobile Store Recharge 9.95% Discount</span>
+    <span class="discount-tag">Discount - {{selectedDiscount}}</span>
 
     <label>Recharge Amount(RMB):</label>
     <div class="amount-options">

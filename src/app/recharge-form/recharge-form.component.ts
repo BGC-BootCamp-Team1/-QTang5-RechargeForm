@@ -6,5 +6,9 @@ import { Component } from '@angular/core';
   styleUrl: './recharge-form.component.css'
 })
 export class RechargeFormComponent {
+  updateDiscount():void {
+    console.log(this.selectedDiscount);
+  }
+  selectedDiscount: string = "Mobile Store Recharge 5% Discount";
 
 }
