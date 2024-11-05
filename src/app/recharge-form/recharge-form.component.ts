@@ -27,6 +27,7 @@ export class RechargeFormComponent {
   discountRate: number = 0;
   paymentAmount: number = this.calculatePaymentAmount(this.selectedAmount);
 
+  isPhoneNumberValid: boolean = false;
   isCustomAmountActive: boolean = false;
   selectedDiscountDescription: string = 'Mobile Store Recharge 5% Discount'; // 默认折扣描述
   discountOptions = [
@@ -57,6 +58,9 @@ export class RechargeFormComponent {
       this.selectedAmount = this.customAmount;
       this.paymentAmount = this.calculatePaymentAmount(this.customAmount);
     }
+  }
+  onPhoneNumberValid(isValid: boolean): void {
+    this.isPhoneNumberValid = isValid;
   }
   
 }

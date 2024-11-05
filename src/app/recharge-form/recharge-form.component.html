@@ -1,5 +1,5 @@
 <form class="recharge-form">
-    <app-phone-number (phoneNumberChange)="onPhoneNumberChange($event)"></app-phone-number>
+    <app-phone-number (phoneNumberChange)="onPhoneNumberChange($event)" (phoneNumberValid)="onPhoneNumberValid($event)"></app-phone-number>
 
     <label for="discount">Promotion:</label>
     <select id="discount" [(ngModel)]="selectedDiscount" name="selectedDiscount" (change)="updateDiscount() ">
@@ -39,6 +39,6 @@
       <p>Amount Received: <span class="received-amount">{{ selectedAmount }} RMB</span></p>
     </div>
 
-    <button type="submit" class="submit-btn" (click)="onSubmit()">Start Recharge</button>
+    <button type="submit" class="submit-btn" (click)="onSubmit()" [disabled]="!isPhoneNumberValid">Start Recharge</button>
             <p class="note">Please carefully check the recharge number, as it cannot be refunded</p>
 </form>
