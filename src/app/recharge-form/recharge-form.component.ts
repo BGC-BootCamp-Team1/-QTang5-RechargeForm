@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-recharge-form',
@@ -6,6 +6,19 @@ import { Component } from '@angular/core';
   styleUrl: './recharge-form.component.css'
 })
 export class RechargeFormComponent {
+  @Output() startRecharge = new EventEmitter<{ phoneNumber: string, paymentAmount: number, receivedAmount: number }>();
+  phoneNumber: string = '';
+
+  onPhoneNumberChange(phoneNumber: string): void {
+    this.phoneNumber = phoneNumber;
+  }
+  onSubmit(): void {
+    this.startRecharge.emit({
+      phoneNumber: this.phoneNumber,
+      paymentAmount: this.paymentAmount,
+      receivedAmount: this.selectedAmount
+    });
+  }
 
   selectedDiscount: string = "Mobile Store Recharge 5% Discount";
 
@@ -45,4 +58,5 @@ export class RechargeFormComponent {
       this.paymentAmount = this.calculatePaymentAmount(this.customAmount);
     }
   }
+  
 }
