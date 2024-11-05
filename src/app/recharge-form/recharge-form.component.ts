@@ -6,9 +6,43 @@ import { Component } from '@angular/core';
   styleUrl: './recharge-form.component.css'
 })
 export class RechargeFormComponent {
-  updateDiscount():void {
-    console.log(this.selectedDiscount);
-  }
+
   selectedDiscount: string = "Mobile Store Recharge 5% Discount";
 
+  selectedAmount: number = 100;
+  customAmount: number = 10;
+  discountRate: number = 0;
+  paymentAmount: number = this.calculatePaymentAmount(this.selectedAmount);
+
+  isCustomAmountActive: boolean = false;
+  selectedDiscountDescription: string = 'Mobile Store Recharge 5% Discount'; // 默认折扣描述
+  discountOptions = [
+    { value: 0.05, description: 'Mobile Store Recharge 5% Discount' },
+    { value: 0.20, description: 'VIP Recharge 20% Discount' }
+  ];
+  updateDiscount():void {
+    this.discountRate = parseFloat(this.selectedDiscount);
+    const selectedOption = this.discountOptions.find(option => option.value === this.discountRate);
+    if (selectedOption) {
+      this.selectedDiscountDescription = selectedOption.description;
+    }
+    this.paymentAmount = this.calculatePaymentAmount(this.selectedAmount);
+  }
+  selectAmount(amount: number): void {
+    this.selectedAmount = amount;
+    this.paymentAmount = this.calculatePaymentAmount(amount);
+    this.isCustomAmountActive = false;
+  }
+
+  calculatePaymentAmount(amount: number): number {
+    return amount * (1 - this.discountRate);
+  }
+
+  onCustomAmountInput(): void {
+    this.isCustomAmountActive = true;
+    if(this.customAmount >= 10 || this.customAmount < 3000){
+      this.selectedAmount = this.customAmount;
+      this.paymentAmount = this.calculatePaymentAmount(this.customAmount);
+    }
+  }
 }
