@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recharge Page</title>
+</head>
+
+<body>
+    <div class="container">
+        <app-menu [currentStep]="currentStep"></app-menu>
+        <app-recharge-form *ngIf="currentStep === 1" (startRecharge)="goToNextStep($event.phoneNumber, $event.paymentAmount, $event.receivedAmount)"></app-recharge-form>
+        <app-confirm-and-pay *ngIf="currentStep === 2" [phoneNumber]="phoneNumber" [paymentAmount]="paymentAmount" [receivedAmount]="receivedAmount"></app-confirm-and-pay>
+    </div>
+</body>
+
+</html>

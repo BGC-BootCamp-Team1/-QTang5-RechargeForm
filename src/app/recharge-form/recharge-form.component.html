@@ -1,0 +1,44 @@
+<form class="recharge-form">
+    <app-phone-number (phoneNumberChange)="onPhoneNumberChange($event)" (phoneNumberValid)="onPhoneNumberValid($event)"></app-phone-number>
+
+    <label for="discount">Promotion:</label>
+    <select id="discount" [(ngModel)]="selectedDiscount" name="selectedDiscount" (change)="updateDiscount() ">
+        <option value="0.05">Mobile Store Recharge 5% Discount</option>
+        <option value="0.20">VIP Recharge 20% Discount</option>
+    </select>
+    <span class="discount-tag">Discount - {{selectedDiscountDescription }}</span>
+
+    <label>Recharge Amount(RMB):</label>
+    <div class="amount-options">
+      <button type="button" class="amount-btn" 
+              [class.active]="selectedAmount === 30" 
+              (click)="selectAmount(30)">30</button>
+      <button type="button" class="amount-btn" 
+              [class.active]="selectedAmount === 50" 
+              (click)="selectAmount(50)">50</button>
+      <button type="button" class="amount-btn" 
+              [class.active]="selectedAmount === 100" 
+              (click)="selectAmount(100)">100</button>
+      <button type="button" class="amount-btn" 
+              [class.active]="selectedAmount === 300" 
+              (click)="selectAmount(300)">300</button>
+      <button type="button" class="amount-btn" 
+              [class.active]="selectedAmount === 500" 
+              (click)="selectAmount(500)">500</button>
+      <input type="number" size="10" class="amount-input" 
+      placeholder="10~3000" 
+      [(ngModel)]="customAmount" name="amount-input"
+      (input)="onCustomAmountInput()" 
+      [class.active]="isCustomAmountActive" 
+      [ngClass]="{'invalid': customAmount < 10 || customAmount > 3000}" />
+      <span *ngIf="customAmount < 10 || customAmount > 3000" class="error-icon">⚠️</span>
+    </div>
+    
+    <div class="amount-summary">
+      <p>Payment Amount: <span class="payment-amount">{{ paymentAmount.toFixed(2) }} RMB</span></p>
+      <p>Amount Received: <span class="received-amount">{{ selectedAmount }} RMB</span></p>
+    </div>
+
+    <button type="submit" class="submit-btn" (click)="onSubmit()" [disabled]="!isPhoneNumberValid">Start Recharge</button>
+            <p class="note">Please carefully check the recharge number, as it cannot be refunded</p>
+</form>
